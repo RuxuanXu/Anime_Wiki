@@ -1,13 +1,16 @@
-﻿
-<html>
+﻿<html>
 
 <head>
 <title>Search Page</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="./style/style.css">
 </head>
+
 <body>
-<H1>SEARCH ANGEL ლ(^o^ლ)  </H1>
-<a href="index.php">Back View All</a><br><br>
+<br><h1>搜尋結果</h1>
+<a id="search" href="index.php">回到首頁</a><br><br>
+
+<center id="paper">
 <?php
 
 $db_server = "localhost";
@@ -24,7 +27,7 @@ mysql_query("SET NAMES 'UTF-8'");
 
 $name = $_POST[_name];
 
-echo "動畫<br>";
+echo "<br>動畫<br>";
 //anime list
 $sql = "Select * from anime where name like '%".$name."%' order by id";
 
@@ -33,10 +36,10 @@ $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
 $main .='<table border="0" cellspacing="0" cellpadding="0" width="396">
          <tr>
 			<td class="bodyText">';
-$main .='	<table width="300" border="0">
-			<tr><td>ID</td> <td>動畫</td></tr>';
+$main .='	<table>
+			<tr class="title"><td>ID</td> <td>動畫</td></tr>';
 		while ( list($a,$b) = mysql_fetch_row($result) ){
-			$main .="<tr><td>$a</td><td>$b </td>";
+			$main .="<tr class='content'><td>$a</td><td>$b </td>";
 	}
 $main .='</table></td></tr></table>';		  
 
@@ -49,16 +52,18 @@ $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
 $main .='<br>公司<br>';
 $main .='<table border="0" cellspacing="0" cellpadding="0" width="396">
          <tr>
-			<td class="bodyText">';
-$main .='	<table width="300" border="0">
-			<tr><td>ID</td> <td>製作公司</td></tr>';
+			<td>';
+$main .='	<table>
+			<tr class="title"><td>ID</td> <td>製作公司</td></tr>';
 		while ( list($a,$b) = mysql_fetch_row($result) ){
-			$main .="<tr><td>$a</td><td>$b </td>";
+			$main .="<tr class='content'><td>$a</td><td>$b </td>";
 	}
 $main .='</table></td></tr></table>';		  
 echo $main;
 
 mysql_close ($link);
 ?>
+</center>
+
 </body>
 </html>
