@@ -8,4 +8,4 @@ PHP 版本： 5.6.30
 - 資料庫名稱: anime_wiki
 - 資料庫密碼: 1234qwer
 
-![示意圖](https://rawgit.com/RuxuanXu/Anime_Wiki/master/pic.jpg)
+![示意圖](https://rawgit.com/RuxuanXu/Anime_Wiki/master/pic.png)
