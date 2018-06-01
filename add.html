@@ -1,15 +1,25 @@
 ﻿<html>
 
 <head>
-<title>Input Data</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Input Data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="./style/style.css">
 </head>
+
 <body>
-<H1>新增動畫</H1>
-<form method="POST" action="addResult.php">
-   動畫名稱:<input type="text" name="_name"></br></br>
-   公司名稱:<input type="text" name="_cname"></br></br>
-   <input type="submit" value="Send">
-</form>
+    <br>
+    <h1>新增動畫</h1>
+    <center id="post">
+        <form method="POST" action="addResult.php">
+            <h3>動畫名稱</h3>
+            <input type="text" name="_name"></br>
+            </br>
+            <h3>製作公司</h3>
+            <input type="text" name="_cname"></br>
+            </br>
+            <input type="submit" value="新增">
+        </form>
+    </center>
 </body>
+
 </html>

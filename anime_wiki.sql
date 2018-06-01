@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機: localhost
--- 產生時間： 2018-06-01 10:04:12
+-- 產生時間： 2018-06-01 12:03:30
 -- 伺服器版本: 5.7.17-log
 -- PHP 版本： 5.6.30
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- 資料庫： `anime_wiki`
 --
+CREATE DATABASE IF NOT EXISTS `anime_wiki` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `anime_wiki`;
 
 -- --------------------------------------------------------
 
@@ -39,7 +41,11 @@ INSERT INTO `anime` (`id`, `name`) VALUES
 (1, '動物朋友'),
 (2, '刀劍神域'),
 (3, '紫羅蘭永恆花園'),
-(4, '境界的彼方');
+(4, '境界的彼方'),
+(5, '名偵探柯南'),
+(6, '冰菓'),
+(7, '魔法使的新娘'),
+(9, '快樂樹朋友');
 
 -- --------------------------------------------------------
 
@@ -59,7 +65,11 @@ CREATE TABLE `company` (
 INSERT INTO `company` (`id`, `name`) VALUES
 (1, 'YAOYOROZU'),
 (2, 'A-1 Pictures'),
-(3, '京都動畫');
+(3, '京都動畫'),
+(4, 'TMS/V1 Studio'),
+(5, 'WIT STUDIO'),
+(6, '測試公司'),
+(7, 'Mondo Media');
 
 -- --------------------------------------------------------
 
@@ -80,7 +90,11 @@ INSERT INTO `make` (`anime_id`, `company_id`) VALUES
 (1, 1),
 (2, 2),
 (3, 3),
-(4, 3);
+(4, 3),
+(5, 4),
+(6, 3),
+(7, 5),
+(9, 7);
 
 --
 -- 已匯出資料表的索引
@@ -112,12 +126,12 @@ ALTER TABLE `make`
 -- 使用資料表 AUTO_INCREMENT `anime`
 --
 ALTER TABLE `anime`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- 使用資料表 AUTO_INCREMENT `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

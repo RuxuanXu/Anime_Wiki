@@ -1,4 +1,16 @@
-﻿
+﻿<html>
+
+<head>
+<title>Search Page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<link rel="stylesheet" href="./style/style.css">
+</head>
+
+<body>
+<br><h1>新增成功</h1>
+<a id="search" href="index.php">回到首頁</a><br><br>
+
+<center id="paper">
 <?php
 $db_server = "localhost";
 $db_name = "anime_wiki"; 
@@ -13,7 +25,7 @@ mysql_select_db($db_name) or die("No database");
 $name = $_POST['_name'];
 $comp_name = $_POST['_cname'];
 
-echo "你新增了動畫條目</br>".$name."，由".$comp_name."公司製作</br>".'<a href="index.php">回到上一頁</a></br>';
+echo "<br>你新增了動畫條目</br>".$name."，由".$comp_name."公司製作</br>";
 
 $sql1 = "INSERT INTO anime(id, name) VALUES ('default','$name');";
 mysql_query($sql1) or die("Error Message :".mysql_error());
@@ -58,3 +70,7 @@ mysql_query($sql3) or die("Error Message5 :".mysql_error());
 mysql_close ($link);
 
 ?>
+</center>
+
+</body>
+</html>
