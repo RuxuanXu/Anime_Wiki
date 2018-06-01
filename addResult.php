@@ -3,7 +3,7 @@
 $db_server = "localhost";
 $db_name = "anime_wiki"; 
 $db_user = "root"; 
-$db_passwd = "123"; 
+$db_passwd = "1234qwer"; 
 
 //Connect Sever
 $link = mysql_connect($db_server, $db_user, $db_passwd);
