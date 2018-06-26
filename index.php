@@ -48,7 +48,7 @@ $main .='<table border="0" cellspacing="0" cellpadding="0" width="396">
 $main .='	<table>
 			<tr class="title"><td>動畫名稱</td><td>製作公司</td><td></td></tr>';
 		while ( list($a,$b,$c) = mysql_fetch_row($result) ){
-			$main .="<tr class='content'><td>$a</td><td>$b</td>";
+			$main .="<tr class='content'><td><a href=\"anime.php?id=$c\">$a</td><td>$b</td>";
 			$main .='<td><a href="deleteResult.php?deleteid='.$c.'" onclick="return confirm("delete?")";>刪除</a></td></tr>';
 	}
 $main .='</table></td></tr></table>';		  
