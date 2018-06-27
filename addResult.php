@@ -12,16 +12,17 @@
 
 <center id="paper">
 <?php
+
+/*------Connect Database------*/
 $db_server = "localhost";
 $db_name = "anime_wiki"; 
 $db_user = "root"; 
 $db_passwd = "1234qwer"; 
 
-//Connect Sever
 $link = mysql_connect($db_server, $db_user, $db_passwd);
-//Connect Database
 mysql_select_db($db_name) or die("No database");
 
+/*------Fetch Input Form------*/
 $name = $_POST['_name'];
 $comp_name = $_POST['_company_name'];
 $series_name = $_POST['_series_name'];
@@ -43,65 +44,66 @@ for($x = 0; $x<$chara_num; $x++){
 	array_push($voiceactors,$_POST[$voice_tag]);
 }
 
-//Insert into anime
+/*------Insert Into Database------*/
+//Anime
 $anime_exist = "SELECT COUNT(name) as count FROM anime WHERE name='$name';";
-$temp = mysql_query($anime_exist) or die;
+$temp = mysql_query($anime_exist) or die("Error Message:".mysql_error());
 $crow = mysql_fetch_array($temp);
 
 if ($crow["count"] == 0){
 	$sql = "INSERT INTO anime(id, name) VALUES ('default','$name');";
 	mysql_query($sql) or die("Error Message:".mysql_error());
-	echo "<br>你新增了動畫條目: ".$name."<br>";
 	$select_id = "SELECT MAX(id) AS aniid FROM anime;";
-	$ani_id = mysql_query($select_id) or die("Error Message :".mysql_error());
+	$ani_id = mysql_query($select_id) or die("Error Message:".mysql_error());
     $row = mysql_fetch_array($ani_id);
-    $ani_id = $row["aniid"];
+	$ani_id = $row["aniid"];
+	echo "<br>你新增了動畫條目: <a href=\"anime.php?id=$ani_id\">".$name."</a><br>";
 }else {
 	$select_id = "SELECT MAX(id) AS aniid FROM anime WHERE name = '$name';";
-	$ani_id = mysql_query($select_id) or die("Error Message :".mysql_error());
+	$ani_id = mysql_query($select_id) or die("Error Message:".mysql_error());
     $row = mysql_fetch_array($ani_id);
     $ani_id = $row["aniid"];
 	echo "<br>此條目已存在! 請至<a href=\"anime.php?id=$ani_id\">".$name."</a>詞條頁面編輯。 <br>";
+	goto end; 
 }
 
-
-//insert into company
+//Company
 $company_exist = "SELECT COUNT(name) as count FROM company WHERE name='$comp_name';";
-$temp = mysql_query($company_exist) or die("Error Message 3:".mysql_error());
+$temp = mysql_query($company_exist) or die("Error Message:".mysql_error());
 $crow = mysql_fetch_array($temp);
 
 if ($crow["count"] == 0){
 	$sql2 = "INSERT INTO company(id, name) VALUES ('default','$comp_name');";
-    mysql_query($sql2) or die("Error Message 1:".mysql_error());	
+    mysql_query($sql2) or die("Error Message:".mysql_error());	
 	$select_id = "SELECT MAX(id) AS compid FROM company;";
 }else {
 	$select_id = "SELECT MAX(id) AS compid FROM company WHERE name = '$comp_name';";
 }
-$comp_id = mysql_query($select_id) or die("Error Message :".mysql_error());
+$comp_id = mysql_query($select_id) or die("Error Message:".mysql_error());
 $row = mysql_fetch_array($comp_id);
 $comp_id = $row["compid"];
 
-//insert into make
+//Make
 $sql = "INSERT INTO make(anime_id, company_id) VALUES ('$ani_id','$comp_id');";
-mysql_query($sql) or die;
+mysql_query($sql) or die("Error Message:".mysql_error());
 
-//insert into series_name
+//Series
 $series_exist = "SELECT COUNT(name) as count FROM series WHERE name='$series_name';";
 $temp = mysql_query($series_exist) or die("Error Message:".mysql_error());
 $crow = mysql_fetch_array($temp);
 
 if ($crow["count"] == 0){
 	$sql = "INSERT INTO series(name) VALUES ('$series_name');";
-    mysql_query($sql) or die("Error Message 1:".mysql_error());
+    mysql_query($sql) or die("Error Message:".mysql_error());
 }
 
-//insert into belong
+//Belong
 $sql = "INSERT INTO belong(series_name, anime_id) VALUES ('$series_name','$ani_id');";
 mysql_query($sql) or die("Error Message:".mysql_error());
 
-//insert into supervisor
+//Supervisor
 $exist = "SELECT COUNT(name) as count FROM supervisor WHERE name='$supervisor_name';";
-$temp = mysql_query($exist) or die("Error Message 3:".mysql_error());
+$temp = mysql_query($exist) or die("Error Message:".mysql_error());
 $crow = mysql_fetch_array($temp);
 
 if ($crow["count"] == 0){
@@ -115,11 +117,11 @@ $id = mysql_query($select_id) or die("Error Message:".mysql_error());
 $row = mysql_fetch_array($id);
 $supervisor_id = $row["id"];
 
-//insert into supervise
+//Supervise
 $sql = "INSERT INTO supervise(supervisor_id, anime_id) VALUES ('$supervisor_id','$ani_id');";
 mysql_query($sql) or die("Error Message:".mysql_error());
 
-//insert into characters
+//Chara
 for($x = 0; $x<$chara_num; $x++){
 	//$voiceactors[$x]
 	//insert into chara
@@ -168,15 +170,23 @@ for($x = 0; $x<$chara_num; $x++){
 				$row = mysql_fetch_array($id);
 				$chara_id = $row["id"];
 
-				//insert into act
+				//Act
 				$sql = "INSERT INTO act(chara_id, anime_id) VALUES ('$chara_id','$ani_id');";
 				mysql_query($sql) or die("Error Message5 :".mysql_error());
-
 			}
 		}
-	}	
+	}
 }
 
+//Period
+$sql = "INSERT INTO period(year, season) VALUES ('$year','$season');";
+mysql_query($sql) or die("Error Message:".mysql_error());
+
+//Showtime
+$sql = "INSERT INTO showtime(anime_id,year,season) VALUES ('$ani_id','$year','$season');";
+mysql_query($sql) or die("Error Message:".mysql_error());
+
+end: 
 mysql_close ($link);
 
 ?>
