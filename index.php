@@ -41,7 +41,7 @@ $sql = "SELECT anime.name, company.name, anime.id
 		
 $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
 
-$main .='<h3>動畫條目</h3>';
+$main .='<br>';
 $main .='<table border="0" cellspacing="0" cellpadding="0" width="396">
          <tr>
 			<td>';
