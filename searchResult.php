@@ -7,8 +7,8 @@
 	}
 ?>
 
+<!DOCTYPE html>
 <html>
-
 <head>
 	<title>Anime Wiki</title>
 	<meta http-equiv="Content-Type" content=" charset=UTF-8"/>
@@ -21,7 +21,13 @@
 
 	<?php
 		require_once 'navigation.php';
+		echo "<script>document.getElementById('search').value ='".$name."';</script>";
 	?>
+	<script>
+        document.getElementById("index").classList.remove("active");
+        document.getElementById("search").classList.add("active");
+    </script>
+
 
 <center id="paper">
 	<?php

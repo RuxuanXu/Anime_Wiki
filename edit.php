@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	require_once 'session.php';
     require_once 'config.php';
     if(!$account){
@@ -184,27 +184,25 @@
     end: 
     mysql_close ($link);
 ?>
-<!DOCTYPE html>
+
 <html>
+
 <head>
     <title>Anime Wiki</title>
-    <?php
-		require_once 'header.php';
-	?>
+    <meta http-equiv="Content-Type" content=" charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <?php
 		require_once 'navigation.php';
-    ?>
-    <script>
-        document.getElementById("index").classList.remove("active");
-        document.getElementById("add").classList.add("active");
-    </script>
+	?>
     <center id="paper">
         <div class="wrapper">
             <br>
-                <h2>新增動畫條目</h2>
+                <h2>編輯動畫條目</h2>
             <br>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
@@ -249,7 +247,7 @@
                     <input type="button" value="增加角色" onclick="addCharacter();">
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="提交條目">
+                    <input type="submit" class="btn btn-primary" value="確認修改">
                 </div>
             </form>
         </div>
