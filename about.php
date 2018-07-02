@@ -22,7 +22,8 @@
     </script>
 
 	<center id="paper">
-		<br>
+        <h1>關於Anime Wiki</h1>
+        <br>
         Anime_Wiki是一個存放動畫資料的資料庫系統。
         <br>
         <br>

@@ -1,18 +1,15 @@
-<html>
-
-<head>
-<title>Search Page</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" href="./style/style.css">
-</head>
-
-<body>
-<br><h1>刪除結果</h1>
-<a id="search" href="index.php">回到首頁</a><br><br>
-
-<center id="paper">
 <?php
+require_once 'session.php';
+require_once 'config.php';
 $deleteid = $_GET['deleteid'];
+
+if(!$account){
+    header("location: login.php");
+}
+if($authority != 'admin'){
+    echo "<script type='text/javascript'>alert('您沒有刪除權限!'); window.history.back();</script>";  
+}
+
 if($deleteid != NULL){
 
     require_once 'config.php';
@@ -23,12 +20,9 @@ if($deleteid != NULL){
     mysql_query($sql2) or die("Error Message :".mysql_error());
 	mysql_query($sql1) or die("Error Message :".mysql_error());
 	
-	mysql_close ($link);
+    mysql_close ($link);
+    echo "<script type='text/javascript'>alert('刪除成功'); window.location.href = 'index.php';</script>";   
 }else{
-    echo "刪除失敗";
+    echo "<script type='text/javascript'>alert('刪除失敗'); window.location.href = 'index.php';</script>";   
 }
 ?>
-</center>
-
-</body>
-</html>

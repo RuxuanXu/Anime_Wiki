@@ -50,7 +50,7 @@
             $ani_id = mysql_query($select_id) or die("Error Message:".mysql_error());
             $row = mysql_fetch_array($ani_id);
             $ani_id = $row["aniid"];
-            $name_err = "此條目已存在! 請至<a href=\"anime.php?id=$ani_id\">".$name."</a>詞條頁面編輯。";
+            $name_err = "此條目已存在!</br>請至<a href=\"anime.php?id=$ani_id\">".$name."</a>詞條頁面編輯。";
             goto end; 
         }
 
@@ -202,10 +202,9 @@
         document.getElementById("add").classList.add("active");
     </script>
     <center id="paper">
+        <h1>新增動畫條目</h1>
+        <br>
         <div class="wrapper">
-            <br>
-                <h2>新增動畫條目</h2>
-            <br>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
                     <label>動畫名稱</label>
@@ -246,7 +245,7 @@
                         </div>
                     </div>
                     <br>
-                    <input type="button" value="增加角色" onclick="addCharacter();">
+                    <input class="smallBtn" type="button" value="增加角色" onclick="addCharacter();">
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="提交條目">

@@ -1,7 +1,8 @@
 <div class="topnav">
 		<a class="active" id="index" href="index.php"><i class="fa fa-book"></i> Anime Wiki</a>
 		<a id="about" href="about.php">關於</a>
-		<a href="#rand">隨機條目</a>
+		<a id="all" href="all.php">動畫列表</a>
+		<a href="random.php">隨機條目</a>
 		
 		<?php
 			if(!$account){

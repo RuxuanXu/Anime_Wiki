@@ -61,21 +61,57 @@
 	?>
 
         <center id="paper">
+                
                 <?php
-                /*------Output Page------*/
-                echo "<h1>$name</h1>";
-                echo "<center id=\"paper\">";
-                echo "<br>系列: ".$series."<br>";
-                echo "<br>監督: ".$supervisor."<br>";
-                echo "<br>製作公司: ".$company."<br>";
-                echo "<br>角色列表:<br>";
-                for($x = 0; $x<count($characters); $x++){
-                echo "<br>".$characters[$x]."<br>";
-                }
-                echo "</center>";
 
-                end:
-                mysql_close ($link);
+                        $sql = "SELECT id 
+                        FROM user
+                        WHERE username = '".$account."'";
+                        $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
+                        list($user_id) = mysql_fetch_row($result);
+
+                        $already_collect = "SELECT COUNT(user_id) as count FROM collection WHERE user_id='$user_id' AND anime_id='$id';";
+                        $temp = mysql_query($already_collect) or die("Error Message:".mysql_error());
+                        $crow = mysql_fetch_array($temp);
+
+                        echo "<div class='act'>";
+                        if($authority == 'admin'){
+                                echo "<i class='fa fa-close'></i><a href='deleteResult.php?deleteid=$id'>刪除條目 </a>";
+                                echo "<i class='fa fa-cog'></i><a href='edit.php?id=$id'>編輯條目 </a>";
+                                if ($crow["count"] == 0){
+                                        echo "<i class='fa fa-star'></i><a href='collect.php?id=$id'>收藏條目 </a>";
+                                }else{
+                                        echo "<i class='fa fa-star'></i><a href='removeCollect.php?id=$id'>取消收藏 </a>"; 
+                                }
+                        }
+                        if($authority == 'editor'){
+                                echo "<i class='fa fa-cog'></i><a href='edit.php?id=$id'>編輯條目</a>";
+                                if ($crow["count"] == 0){
+                                        echo "<i class='fa fa-star'></i><a href='collect.php?id=$id'>收藏條目 </a>";
+                                }else{
+                                        echo "<i class='fa fa-star'></i><a href='removeCollect.php?id=$id'>取消收藏 </a>"; 
+                                }
+                        }
+                        if($authority == 'normal'){
+                                if ($crow["count"] == 0){
+                                        echo "<i class='fa fa-star'></i><a href='collect.php?id=$id'>收藏條目 </a>";
+                                }else{
+                                        echo "<i class='fa fa-star'></i><a href='removeCollect.php?id=$id'>取消收藏 </a>"; 
+                                }
+                        }
+                        echo "</div><br>";
+
+                        echo "<h1>$name</h1>";
+                        echo "<br>系列: ".$series."<br>";
+                        echo "<br>監督: ".$supervisor."<br>";
+                        echo "<br>製作公司: ".$company."<br>";
+                        echo "<br>角色列表:<br>";
+                        for($x = 0; $x<count($characters); $x++){
+                        echo "<br>".$characters[$x]."<br>";
+                        }
+
+                        end:
+                        mysql_close ($link);
                 ?>
         </center>
 

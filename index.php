@@ -17,26 +17,25 @@
 		require_once 'navigation.php';
 	?>
 
-	<center id="paper">
-		<br>
-		<table>
-			<tr class="title">
-				<td>動畫名稱</td><td>製作公司</td>
-			</tr>
+	<center id="paper" style="overflow-y: hidden;">
+		<a href="about.php"><img src="/images/banner.png" style="width:100%;"></a>
+		
+		<div class="scl">
 			<?php
-				$sql = "SELECT anime.name, company.name, anime.id, company.id 
-				FROM anime, make, company 
-				WHERE anime.id = anime_id 
-				and company.id = company_id;";
-				$main = '';
-				$result = mysql_query($sql) or die("Error Message:".mysql_error( ));
-				while ( list($a,$b,$c,$d) = mysql_fetch_row($result) ){
-					$main .="<tr class='content'><td><a href=\"anime.php?id=$c\">$a</td><td><a href=\"company.php?id=$d\">$b</td>";
-				}
-				echo $main;
-				mysql_close ($link);
-			?>
-		</table>
+            $sql = "SELECT name, id
+                    FROM anime
+                    ORDER BY id DESC
+                    LIMIT 10;";
+			$result = mysql_query($sql) or die("Error Message:".mysql_error( ));
+			$main = "<h3>最近新增條目: ";
+			while (list($a,$b) = mysql_fetch_row($result)){
+				$main .="<a href=\"anime.php?id=$b\">".$a." </a>";
+			}
+            $main .='</h3>';		  
+            echo $main;
+            mysql_close ($link);
+        ?>
+		</div>
 	</center>
 
 	</body>
