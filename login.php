@@ -32,8 +32,8 @@
                 if($password == $row['real_password']){
                     //login success
                     session_start();
-                    $_SESSION['username'] = $username;      
-                    header("location: index.php");
+                    $_SESSION['username'] = $username; 
+                    echo "<script type='text/javascript'>alert('登入成功');window.location.href = 'index.php';</script>";     
                 } else{
                     $password_err = '密碼錯誤';
                 }
@@ -54,20 +54,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <div class="topnav">
-		<a class="active" href="index.php">Anime Wiki</a>
-		<a href="#about">關於</a>
-		<a href="#rand">隨機條目</a>
-		<a class="account" href="login.php">登入</a>
-		<a class="account" href="register.php">註冊帳號</a>
-		<div class="search-container">
-			<form  method="POST" action="searchResult.php">
-				<input type="text" name="_name" placeholder="搜尋...">
-				<button type="submit"><i class="fa fa-search"></i>
-			</form>
-		</div>
-		
-	</div>
+    <?php
+		require_once 'navigation.php';
+	?>
     
     <center id="paper">
         <div class="wrapper">

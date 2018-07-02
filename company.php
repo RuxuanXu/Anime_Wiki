@@ -1,26 +1,17 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content=" charset=UTF-8"/>
-  	<link rel="stylesheet" href="./style/style.css">
+<meta http-equiv="Content-Type" content=" charset=UTF-8"/>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+	<link rel="stylesheet" href="./style/style.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
 
-    <div class="topnav">
-		<a class="active" href="index.php">Anime Wiki</a>
-		<a href="#about">關於</a>
-		<a href="#rand">隨機條目</a>
-		<a class="account" href="login.php">登入</a>
-		<a class="account" href="register.php">註冊帳號</a>
-		<div class="search-container">
-			<form  method="POST" action="searchResult.php">
-				<input type="text" name="_name" placeholder="搜尋...">
-				<button type="submit"><i class="fa fa-search"></i>
-			</form>
-		</div>
-	</div>
+    <?php
+		require_once 'navigation.php';
+	?>
 
 	<?php
 	require_once 'config.php';
