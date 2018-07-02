@@ -23,17 +23,7 @@
 <!--    PHP Part Start    -->
 <?php
 
-$db_server = "localhost";
-$db_name = "anime_wiki"; 
-$db_user = "root"; 
-$db_passwd = "1234qwer"; 
-
-//Connect Sever
-$link = mysql_connect($db_server, $db_user, $db_passwd);
-//Connect Database
-mysql_select_db($db_name) or die("No database");
-
-mysql_query("SET NAMES 'UTF-8'");
+require_once 'config.php';
 $sql = "SELECT anime.name, company.name, anime.id 
         FROM anime, make, company 
         WHERE anime.id = anime_id 

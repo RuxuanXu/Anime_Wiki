@@ -15,16 +15,7 @@
 $deleteid = $_GET['deleteid'];
 if($deleteid != NULL){
 
-   $db_server = "localhost";
-   $db_name = "anime_wiki"; 
-   $db_user = "root"; 
-   $db_passwd = "1234qwer"; 
-
-    //Connect Sever
-    $link = mysql_connect($db_server, $db_user, $db_passwd);
-    //Connect Database
-    mysql_select_db($db_name) or die("No database");
-	mysql_query("SET NAMES 'UTF-8'");
+    require_once 'config.php';
 
 	$sql1 = "DELETE FROM anime WHERE id = '$deleteid'";
     $sql2 = "DELETE FROM make WHERE anime_id = '$deleteid'";
