@@ -12,12 +12,12 @@
         list($name) = mysql_fetch_row($result);
 
         //Company
-        $sql = "SELECT name 
+        $sql = "SELECT name, company_id 
                 FROM company NATURAL JOIN make 
                 WHERE anime_id = $id
                 AND company_id = company.id";
         $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
-        list($company) = mysql_fetch_row($result);
+        list($company,$company_id) = mysql_fetch_row($result);
 
         //Series
         $sql = "SELECT name 
@@ -28,12 +28,12 @@
         list($series) = mysql_fetch_row($result);
 
         //Supervisor
-        $sql = "SELECT name 
+        $sql = "SELECT name,supervisor_id 
                 FROM supervisor NATURAL JOIN supervise
                 WHERE anime_id = $id
                 AND supervisor_id = supervisor.id";
         $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
-        list($supervisor) = mysql_fetch_row($result);
+        list($supervisor,$supervisor_id) = mysql_fetch_row($result);
 
         //Character
         $sql = "SELECT name 
@@ -102,12 +102,20 @@
                         echo "</div><br>";
 
                         echo "<h1>$name</h1>";
-                        echo "<br>系列: ".$series."<br>";
-                        echo "<br>監督: ".$supervisor."<br>";
-                        echo "<br>製作公司: ".$company."<br>";
-                        echo "<br>角色列表:<br>";
-                        for($x = 0; $x<count($characters); $x++){
-                        echo "<br>".$characters[$x]."<br>";
+                        if($series!=""){
+                                echo "<br>系列: <a href='series.php?id=".$series."'>".$series."</a><br>";
+                        }
+                        if($supervisor!=""){
+                                echo "<br>監督: <a href='supervisor.php?id=".$supervisor_id."'>".$supervisor."</a><br>";
+                        }
+                        if($company!=""){
+                                echo "<br>製作公司: <a href='company.php?id=".$company_id."'>".$company."</a><br>";
+                        }
+                        if(count($characters)>0){
+                                echo "<br>角色列表:<br>";
+                                for($x = 0; $x<count($characters); $x++){
+                                echo "<br>".$characters[$x]."<br>";
+                        }
                         }
 
                         end:

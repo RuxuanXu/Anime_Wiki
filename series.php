@@ -1,26 +1,28 @@
+<?php
+    require_once 'session.php';
+	require_once 'config.php';
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-<title>Anime</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<link rel="stylesheet" href="./style/style.css">
+<title>Anime Wiki</title>
+<?php
+		require_once 'header.php';
+	?>
 </head>
 
 <body>
-<br>
-<a id="search" href="index.php">回到首頁</a><br><br>
-
 
 <?php
-require_once 'config.php';
+require_once 'navigation.php';
 
 /*------Get Anime Data------*/
 //series
-$name = $_GET['name'];
-$sql = "SELECT name
-        FROM series 
-		WHERE name = $name";
+$name2 = $_GET['id'];
+$sql = "SELECT name FROM series 
+		WHERE name='$name2';";
 $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
 list($series_name) = mysql_fetch_row($result);
 
@@ -29,7 +31,7 @@ $sql = "SELECT name
         FROM anime 
 		WHERE id in(SELECT anime_id
 					FROM belong 
-					WHERE series_name=$name)";
+					WHERE series_name='$name2');";
 $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
 $animes=array();
 while ( list($anime) = mysql_fetch_row($result)){
@@ -41,7 +43,7 @@ $sql = "SELECT id
         FROM anime 
 		WHERE id in(SELECT anime_id
 					FROM belong 
-					WHERE series_name=$name)";
+					WHERE series_name='$name2');";
 $result = mysql_query($sql) or die("Error Message:".mysql_error( ));
 $animes_id=array();
 while ( list($anime_id) = mysql_fetch_row($result)){
@@ -49,8 +51,9 @@ while ( list($anime_id) = mysql_fetch_row($result)){
 }
 
 /*------Output Page------*/
-echo "<h1>$series_name</h1>";
+
 echo "<center id=\"paper\">";
+echo "<h1>$series_name</h1>";
 echo "<br>系列動畫列表:<br>";
 for($x = 0; $x<count($animes); $x++){
     echo "<br><td><a href=\"anime.php?id=".$animes_id[$x]."\">".$animes[$x]."</td><br>";

@@ -179,7 +179,7 @@
         $sql = "INSERT INTO showtime(anime_id,year,season) VALUES ('$ani_id','$year','$season');";
         mysql_query($sql) or die("Error Message:".mysql_error());
 
-        echo "<script type='text/javascript'>alert('新增成功');window.location.href = 'index.php';</script>";
+        echo "<script type='text/javascript'>alert('新增成功');window.location.href = 'anime.php?id=".$ani_id."';</script>";
     }
     end: 
     mysql_close ($link);
